@@ -60,9 +60,9 @@ Time Input: Rebalance Time
 ## Data Sources
 
 CoinGecko API:
-[Coin Historic Chart Data by ID](https://docs.coingecko.com/reference/coins-id-market-chart)
-[Coins List (ID Map)](https://docs.coingecko.com/reference/coins-list)
-[Search](https://docs.coingecko.com/reference/search-data)
+- [Coin Historic Chart Data by ID](https://docs.coingecko.com/reference/coins-id-market-chart)
+- [Coins List (ID Map)](https://docs.coingecko.com/reference/coins-list)
+- [Search](https://docs.coingecko.com/reference/search-data)
 
 
 
