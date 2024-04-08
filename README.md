@@ -1,68 +1,63 @@
-# Index Coop Composite Strategy Backtesting App
+# Index Coop Composite Strategy Backtesting Application
 
 ## Overview
 
-This project aims to create a simple tool for backtesting strategies to see the historical performance of a sector or theme according to a preset methodology. It will be used during the product development process to illustrate historical returns. It will also be used by Index Coop Informational Indices (ICII).
+This project is dedicated to developing a user-friendly tool for backtesting investment strategies within specific sectors or themes, based on predefined methodologies. It aims to facilitate the visualization of historical performance, aiding in the product development process and providing valuable insights for Index Coop Informational Indices (ICII).
 
 ## Features
 
-The user should be able to select a variety of whitelisted assets from CoinGecko’s token list representing the eligible asset universe. Then, the user will select a backtest start date, a methodology from a list of pre-designed methodologies, and a rebalance schedule. The user will also be able to select a benchmark asset. The application will fetch the daily price, circulating market capitalisation (CMC), and total supply and, from the price and total supply, derive a fully diluted valuation (FDV).
+- **Asset Selection**: Users can choose from a list of whitelisted assets sourced from CoinGecko, representing a curated universe of eligible investments.
+- **Customizable Backtesting Parameters**: Options for setting the backtest start date, methodology, rebalance schedule, benchmark asset, and other relevant parameters.
+- **Comprehensive Data Utilization**: Utilizes daily price data, circulating market capitalization (CMC), total supply, and fully diluted valuation (FDV) for in-depth analysis.
+- **Result Comparison**: Facilitates direct comparison between the backtested strategy's performance and a chosen benchmark.
 
-The application will then run a backtest from the start date utilizing the eligible asset universe, the selected methodology, and rebalance cadence.
+### Detailed Inputs:
 
-The application will return the results of the backtest versus the benchmark.
+- **Eligible Assets**: Selection from a predefined, whitelisted universe.
+- **Start Date**: Customizable initiation point for backtesting.
+- **Rebalance Cadence**: Options for monthly, quarterly, or annually adjustments.
+- **Methodology**: Selection from a list of pre-defined strategies.
+- **Max Assets**: Limit on the number of assets within the strategy.
+- **Minimum Market Capitalisation**: Threshold for asset eligibility based on market cap.
+- 
 
-Inputs:
-- Eligible Assets
-- Start Date
-- Rebalance Cadence
-- Methodology
-- Circulating Market Capitalization
-- Fully Diluted Valuation
+## Application Structure
 
-
-- Max Assets
-- Minimum Market Capitalisation
-
-## App Structure:
-
-Title: Index Coop Composite Backtester
-Header: Eligible Asset Universe
-
-Search Bar: Search for Assets
-Two columns: Unselected Assets, Selected Assets
-/*
-The user should be presented with a list of all assets in "Unselected Assets"
-Then they should be able to add an asset to "Selected Assets"
-They should be able to move an asset from "Unselected Assets" to "Selected Assets"
-*/
-
-Button: Save Assets --> Fetch price, cmc, total supply for each asset daily. calculate FDV daily.
-
-Header: Choose Methodology
-Single Select Dropdown: {list of eligible methodologies}
-Header: Restrictions
-Number Input (Slider): Max Assets
-Number Input: Min Market Cap
-
-Header: Rebalancing
-Date Input: Start Date
-Single Select Dropdown: Cadence (Monthly, Quarterly, Annually)
-Time Input: Rebalance Time
+- **Title**: Index Coop Composite Backtester
+- **Eligible Asset Universe Selection**:
+    - Search and filter functionality to locate specific assets.
+    - Dual-column layout for asset selection: "Unselected Assets" and "Selected Assets", facilitating easy organization.
+- **Methodology Configuration**:
+    - Dropdown menu for methodology selection, accompanied by concise descriptions of each methodology.
+- **Restrictions**:
+    - Slider and input fields for setting the maximum number of assets and minimum market cap requirement.
+- **Rebalancing Setup**:
+    - Date and time inputs to define the start and cadence of the rebalancing process.
+- **Results**:
+    - Historical Net Asset Value vs. Benchmark
+    - Finanical metrics such as volatility, Sharpe Ratio, Sorintino Ratio, Beta, Correlation    
 
 ## Methodologies
 
-- Equal: Weight each component equally as long as it is eligible.
-- Circulating Market Capitalisation: Weight each component according to its Circ. MC
-- Capped 25% Circulating MC: Same as Circ. Market Cap, but if a component has a weight > 30%, lower it to 25% and distribute the remaining amount proportionally to eligible strategies
-- Square Root Market Cap: Weight each component accord to the square root of its circulating market cap
-  
+- **Equal Weighting**: Distributes investment evenly across all selected assets.
+- **Circulating Market Capitalisation**: Weights investments proportionally to the circulating market capitalization of each asset.
+- **Capped 25% Circulating MC**: Similar to Circulating Market Cap, but caps any single asset's weight at 25%, redistributing excess proportionally.
+- **Square Root Market Cap**: Assigns weight based on the square root of each asset's circulating market cap, balancing influence between large and small cap assets.
+
 ## Data Sources
 
-CoinGecko API:
-- [Coin Historic Chart Data by ID](https://docs.coingecko.com/reference/coins-id-market-chart)
-- [Coins List (ID Map)](https://docs.coingecko.com/reference/coins-list)
-- [Search](https://docs.coingecko.com/reference/search-data)
+Utilizes CoinGecko's API for up-to-date financial data, including:
+- Coin Historic Chart Data by ID
+- Coins List (ID Map)
+- Search
+
+## Enhancements
+
+- **Simulation**: Include a feature for simulating future performance based on historical volatility and trends.
+- **User Profiles**: Allow users to save and revisit their backtesting configurations and results.
+- **Advanced Filtering**: Enhance the asset selection process with more sophisticated filters (e.g., sector, performance criteria).
+- **Interactive Results**: Dynamic charts and graphs to visualize backtesting outcomes and comparisons with benchmarks.
+- **API Integration Best Practices**: Ensure efficient and respectful use of the CoinGecko API to maintain service integrity and responsiveness.
 
 
 
