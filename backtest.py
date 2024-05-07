@@ -4,7 +4,6 @@ from datetime import timedelta
 
 # Backtesting loop
 def perform_backtest(df, start_date, end_date, weighting_scheme, max_number_of_components, rebalance_frequency, initial_portfolio_value=100):
-    
     if 'timestamp' not in df.columns:
         raise ValueError("Timestamp column missing from the DataFrame")
     # Sort the DataFrame for consistency

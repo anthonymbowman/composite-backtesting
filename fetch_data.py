@@ -3,17 +3,11 @@ import requests
 import pandas as pd
 from datetime import datetime, timedelta
 
-# Get the API key from an environment variable
 API_KEY = os.getenv('COINGECKO_API_KEY')
 BASE_URL = 'https://pro-api.coingecko.com/api/v3'
 
-# Check if the API_KEY is correctly set in your environment variables
 if API_KEY is None:
     raise ValueError("COINGECKO_API_KEY environment variable not set")
-
-def load_selected_coins(csv_path='selected_coins.csv'):
-    """Load selected coin IDs from a CSV file."""
-    return pd.read_csv(csv_path)['id'].tolist()
 
 def fetch_historical_data(coin_id, start_date, end_date):
     """Fetch historical price and market cap data for a single cryptocurrency."""
@@ -21,9 +15,8 @@ def fetch_historical_data(coin_id, start_date, end_date):
     headers = {'X-Cg-Pro-Api-Key': API_KEY}
     params = {
         'vs_currency': 'usd',
-        # Adjust start date to one day earlier to ensure coverage
-        'from': (start_date - timedelta(days=2)).timestamp(),
-        'to': end_date.timestamp()
+        'from': (datetime.combine(start_date, datetime.min.time()) - timedelta(days=2)).timestamp(),
+        'to': datetime.combine(end_date, datetime.min.time()).timestamp()
     }
     response = requests.get(url, headers=headers, params=params)
     if response.status_code == 200:
@@ -33,25 +26,16 @@ def fetch_historical_data(coin_id, start_date, end_date):
         df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
         df.set_index('timestamp', inplace=True)
         df['coin_id'] = coin_id
-        # Filter the DataFrame to the original date range
-        return df[start_date:end_date]
+        return df.reset_index()  # Ensure 'timestamp' is a column after resetting the index
     else:
         print(f"Failed to fetch data for {coin_id}: {response.text}")
         return pd.DataFrame()
 
-# Load selected coins
-coin_ids = load_selected_coins()
+def fetch_data_for_coins(coin_ids, start_date, end_date):
+    """Fetch historical data for a list of coins."""
+    all_data = pd.DataFrame()
+    for coin_id in coin_ids:
+        df = fetch_historical_data(coin_id, start_date, end_date)
+        all_data = pd.concat([all_data, df], ignore_index=False)
+    return all_data
 
-# Define your date range
-start_date = datetime(2021, 1, 1)
-end_date = datetime(2023, 12, 31)
-
-# Collect all data
-all_data = pd.DataFrame()
-
-for coin_id in coin_ids:
-    df = fetch_historical_data(coin_id, start_date - timedelta(days=1), end_date)
-    all_data = pd.concat([all_data, df], ignore_index=False)
-
-# Save the data to CSV
-all_data.reset_index().to_csv('crypto_data.csv', index=False)
