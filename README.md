@@ -19,7 +19,6 @@ This project is dedicated to developing a user-friendly tool for backtesting inv
 - **Methodology**: Selection from a list of pre-defined strategies.
 - **Max Assets**: Limit on the number of assets within the strategy.
 - **Minimum Market Capitalisation**: Threshold for asset eligibility based on market cap.
-- 
 
 ## Application Structure
 
@@ -58,7 +57,3 @@ Utilizes CoinGecko's API for up-to-date financial data, including:
 - **Advanced Filtering**: Enhance the asset selection process with more sophisticated filters (e.g., sector, performance criteria).
 - **Interactive Results**: Dynamic charts and graphs to visualize backtesting outcomes and comparisons with benchmarks.
 - **API Integration Best Practices**: Ensure efficient and respectful use of the CoinGecko API to maintain service integrity and responsiveness.
-
-
-
-
